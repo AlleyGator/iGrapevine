@@ -1,0 +1,12 @@
+//
+// Prefix header for all source files of the 'iGrapeVine.tests' target in the 'iGrapeVine.tests' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+
+// Custom Includes
+#import "CommonIncludes.h"
+#endif
