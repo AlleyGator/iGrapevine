@@ -231,6 +231,8 @@
 //
 //End Function
 
+// ** Super implements count
+
 //Public Function IsAlphabetized() As Boolean
 //'
 //' Name:         IsAlphabetized
@@ -241,6 +243,8 @@
 //IsAlphabetized = Alphabetized
 //
 //End Function
+
+// ** property implements getter
 
 //Public Sub SetAlphabetized(Alpha As Boolean)
 //'
@@ -293,6 +297,7 @@
     
     _alphabetized = alphabetized;
 }
+
 //Public Sub Insert(ItemName As String, ItemCost As String, ItemNote As String)
 //'
 //' Name:         Insert
@@ -342,6 +347,9 @@
 //End If
 //
 //End Sub
+
+// ** Super implements insert:
+
 //Public Sub MoveTo(ByVal ItemName As String)
 //'
 //' Name:         MoveTo
@@ -362,6 +370,18 @@
 //Loop
 //
 //End Sub
+
+// ** Super implements moveTo:
+
+-(void)insertWithName:(NSString *)itemName cost:(NSString *)itemCost note:(NSString *)note {
+    LinkedMenuListNode *newNode = (LinkedMenuListNode *)[self newNodeInstance];
+    newNode.name = itemName;
+    newNode.cost = itemCost;
+    newNode.note = note;
+    
+    [self insert:newNode];
+}
+
 //
 //Public Function GetItemPlace(ByRef ItemName As String) As Long
 //'
@@ -381,6 +401,18 @@
 //GetItemPlace = 0
 //
 //End Function
+- (int)getItemPlace:(NSString *)itemName {
+    [self moveToPlace:0];
+    int place = 1;
+    while ([self item]) {
+        if ([itemName isEqualToString:[self.item name]])
+            return place;
+        place ++;
+        [self moveNext];
+    }
+    place = 0;
+    return place;
+}
 //
 //Public Sub MoveToPlace(ByVal Place As Integer)
 //'
@@ -397,7 +429,9 @@
 //Loop
 //
 //End Sub
-//
+
+// ** Super implements moveToPlace
+
 //Public Function DisplayItem() As String
 //'
 //' Name:         DisplayItem
@@ -447,6 +481,54 @@
 //End If
 //
 //End Function
+- (NSString *)displayItem {
+    NSString *displayItem = @"";
+    LinkedMenuListNode *item = [self item];
+    if (item) {
+        if ([item isLink] ||
+            [item isInclusion]) {
+            displayItem = [[item name] stringByAppendingString:[item cost]];
+        }
+        else {
+            // 'Add the name
+            displayItem = [item name];
+            
+            // 'Add the multiplier
+            if (self.display == ldMultiplierDot ||
+                (self.display == ldMultiplier &&
+                 ![[item cost] isEqualToString:@"1"])) {
+                    displayItem = [displayItem stringByAppendingFormat:@" x%@", [item cost]];
+                }
+            
+            // 'Add the dots
+            if (self.display == ldMultiplierDot ||
+                self.display == ldDot) {
+                displayItem = [displayItem stringByAppendingFormat:@" %@", [@"" stringByPaddingToLength:[item cost].intValue withString:@"o" startingAtIndex:0]];
+            }
+            
+            // 'Add the parens, cost if needed and note if needed
+            if (self.display == ldCost ||
+                self.display == ldCostOnly) {
+                displayItem = [displayItem stringByAppendingFormat:@" (%@", [item cost]];
+                if (item.note.length &&
+                    self.display == ldCost) {
+                    displayItem = [displayItem stringByAppendingFormat:@", %@", item.note];
+                }
+                displayItem = [displayItem stringByAppendingString:@")"];
+            }
+            else if (self.display == ldNoteOnly &&
+                     item.note.length) {
+                displayItem = [displayItem stringByAppendingFormat:@" (%@)", item.note];
+            }
+        }
+    }
+    else
+        displayItem = @"(Error: Cursor off Menu)";
+    
+    return displayItem;
+}
+
+
 //
 //Public Sub Merge(MergeMenu As LinkedMenuList, Aggressive As Boolean, ByRef AllChanges As String)
 //'
@@ -585,6 +667,9 @@
 //ItemName = Cursor.Name
 //
 //End Function
+- (NSString *)itemName {
+    return [self.item name];
+}
 //
 //Public Function ItemCost() As String
 //'
@@ -596,6 +681,10 @@
 //ItemCost = Cursor.Cost
 //
 //End Function
+- (NSString *)itemCost
+{
+    return [self.item cost];
+}
 //
 //Public Function ItemNote() As String
 //'
@@ -607,6 +696,9 @@
 //ItemNote = Cursor.Note
 //
 //End Function
+- (NSString *)itemNote {
+    return [self.item note];
+}
 //
 //Public Sub Append(ItemName As String, ItemCost As String, ItemNote As String)
 //'
@@ -644,7 +736,7 @@
 //NodeCount = NodeCount + 1
 //
 //End Sub
-- (void)appendName:(NSString *)name cost:(NSString *)cost note:(NSString *)note {
+- (void)appendWithName:(NSString *)name cost:(NSString *)cost note:(NSString *)note {
     LinkedMenuListNode *newNode = (LinkedMenuListNode *)[self newNodeInstance];
     newNode.name = name;
     newNode.cost = cost;
@@ -688,85 +780,9 @@
 //
 //End Sub
 - (LinkedMenuListNode *)remove {
-    LinkedMenuListNode *node = (LinkedMenuListNode *)[super remove];
-    return node;
+    return(LinkedMenuListNode *)[super remove];
 }
-//
-//Public Function IsEmpty() As Boolean
-//'
-//' Name:         IsEmpty
-//' Description:  Tells whether the list is empty or not.
-//' Returns:      TRUE if the list is empty, FALSE otherwise.
-//'
-//
-//IsEmpty = (NodeCount = 0)
-//
-//End Function
-//
-//Public Function Off() As Boolean
-//'
-//' Name:         Off
-//' Description:  Tells whether the cursor has moved off the list.
-//' Returns:      TRUE if the cursor is off the list, FALSE otherwise.
-//'
-//
-//Off = (Cursor Is Nothing)
-//
-//End Function
-//
-//Public Sub MoveNext()
-//'
-//' Name:         MoveNext
-//' Description:  Move the cursor to the next item.
-//'
-//
-//If Not Cursor Is Nothing Then Set Cursor = Cursor.NextNode
-//
-//End Sub
-//
-//Public Sub MovePrevious()
-//'
-//' Name:         MovePrevious
-//' Description:  Move the cursor to the previous item.
-//'
-//
-//If Not Cursor Is Nothing Then Set Cursor = Cursor.PrevNode
-//
-//End Sub
-//
-//Public Sub First()
-//'
-//' Name:         First
-//' Description:  Move the cursor to the first item.
-//'
-//
-//Set Cursor = FirstNode
-//
-//End Sub
-//
-//Public Sub Last()
-//'
-//' Name:         Last
-//' Description:  Move the cursor to the last item.
-//'
-//
-//Set Cursor = LastNode
-//
-//End Sub
-//
-//Public Sub Clear()
-//'
-//' Name:         Clear
-//' Description:  Empty the list of all items.
-//'
-//
-//Me.First
-//Do Until Cursor Is Nothing
-//Me.Remove
-//Loop
-//
-//End Sub
-//
+
 //Public Sub OutputToFile(XML As XMLWriterClass)
 //'
 //' Name:         OutputToFile
@@ -818,6 +834,9 @@
 //Set Cursor = MemCursor
 //
 //End Sub
+- (void)outputToFile:(id)xmlWriter {
+    
+}
 //
 //Public Sub InputFromFile(XML As XMLReaderClass, Version As Double)
 //'
@@ -976,7 +995,7 @@
         [Root getStrB:fileNum stringValue:&mName];
         [Root getStrB:fileNum stringValue:&mCost];
         [Root getStrB:fileNum stringValue:&mNote];
-        [self appendName:mName cost:mCost note:mNote];
+        [self appendWithName:mName cost:mCost note:mNote];
         i--;
     }
     _alphabetized = tempAlpha;

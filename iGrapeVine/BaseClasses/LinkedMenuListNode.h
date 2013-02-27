@@ -20,4 +20,5 @@
 
 @interface LinkedMenuListNode (NonGrapevine)
 - (BOOL)isInclusion;
+- (BOOL)isLink;
 @end

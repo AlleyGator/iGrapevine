@@ -24,5 +24,8 @@
 - (BOOL)isInclusion {
     return [self.cost isEqualToString:@"+"];
 }
+- (BOOL)isLink {
+    return [self.cost isEqualToString:@":"];
+}
 
 @end

@@ -24,9 +24,29 @@
 //Public Category As RaceType                 'Race with which these menus are associated
 @property (nonatomic) RaceType category;
 
+//Public Sub Insert(ItemName As String, ItemCost As String, ItemNote As String)
+- (void)insertWithName:(NSString *)itemName cost:(NSString *)itemCost note:(NSString *)note;
+//Public Function GetItemPlace(ByRef ItemName As String) As Long
+- (int)getItemPlace:(NSString *)itemName;
+- (NSString *)displayItem;
+//Public Sub Merge(MergeMenu As LinkedMenuList, Aggressive As Boolean, ByRef AllChanges As String)
+- (void)mergeWithMenu:(LinkedMenuList *)otherMenu overwriteDuplicates:(BOOL)overwriteDuplicates outputChanges:(NSString **)allChanges;
+
+//Public Function ItemName() As String
+- (NSString *)itemName;
+
+//Public Function ItemCost() As String
+- (NSString *)itemCost;
+
+//Public Function ItemNote() As String
+- (NSString *)itemNote;
+
+//Public Sub Append(ItemName As String, ItemCost As String, ItemNote As String)
+- (void)appendWithName:(NSString *)itemName cost:(NSString *)itemCost note:(NSString *)itemNote;
 - (LinkedMenuListNode *)remove;
 
 - (void)inputFromBinary:(int)fileNum version:(float)version;
+
 @end
 
 @interface LinkedMenuList (NonGrapevine)

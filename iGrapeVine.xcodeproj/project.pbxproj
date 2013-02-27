@@ -34,6 +34,10 @@
 		B0F1133316D5E4A6007F9F33 /* LinkedMenuListNodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F1132B16D5E4A6007F9F33 /* LinkedMenuListNodeTest.m */; };
 		B0F1133416D5E4A6007F9F33 /* Luther.gex in Resources */ = {isa = PBXBuildFile; fileRef = B0F1132C16D5E4A6007F9F33 /* Luther.gex */; };
 		B0F1133516D5E4A6007F9F33 /* RootTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F1132E16D5E4A6007F9F33 /* RootTest.m */; };
+		B0FB204316DDC175006E019A /* LinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F1131216D5E464007F9F33 /* LinkedList.m */; };
+		B0FB204516DDC25C006E019A /* PublicVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FB204416DDC25C006E019A /* PublicVariables.m */; };
+		B0FB204616DDC25C006E019A /* PublicVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FB204416DDC25C006E019A /* PublicVariables.m */; };
+		B0FB204916DDC37D006E019A /* PublicQueryKeysTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FB204816DDC37D006E019A /* PublicQueryKeysTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +96,11 @@
 		B0F1132C16D5E4A6007F9F33 /* Luther.gex */ = {isa = PBXFileReference; lastKnownFileType = file; path = Luther.gex; sourceTree = "<group>"; };
 		B0F1132D16D5E4A6007F9F33 /* RootTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTest.h; sourceTree = "<group>"; };
 		B0F1132E16D5E4A6007F9F33 /* RootTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTest.m; sourceTree = "<group>"; };
+		B0FB204116DDB304006E019A /* PublicVariables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicVariables.h; sourceTree = "<group>"; };
+		B0FB204216DDBF77006E019A /* PublicQueryKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicQueryKeys.h; sourceTree = "<group>"; };
+		B0FB204416DDC25C006E019A /* PublicVariables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicVariables.m; sourceTree = "<group>"; };
+		B0FB204716DDC37D006E019A /* PublicQueryKeysTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicQueryKeysTest.h; sourceTree = "<group>"; };
+		B0FB204816DDC37D006E019A /* PublicQueryKeysTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicQueryKeysTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +167,9 @@
 				B0F1131F16D5E479007F9F33 /* LinkedMenuList.m */,
 				B0F1132016D5E479007F9F33 /* PublicConstants.h */,
 				B0F1132116D5E479007F9F33 /* PublicTypes.h */,
+				B0FB204116DDB304006E019A /* PublicVariables.h */,
+				B0FB204416DDC25C006E019A /* PublicVariables.m */,
+				B0FB204216DDBF77006E019A /* PublicQueryKeys.h */,
 				B0F1130E16D5E464007F9F33 /* BaseClasses */,
 				B0F112E616D5E175007F9F33 /* AppDelegate.h */,
 				B0F112E716D5E175007F9F33 /* AppDelegate.m */,
@@ -197,6 +209,8 @@
 				B0F1130116D5E175007F9F33 /* iGrapeVineTests.h */,
 				B0F1130216D5E175007F9F33 /* iGrapeVineTests.m */,
 				B0F112FC16D5E175007F9F33 /* Supporting Files */,
+				B0FB204716DDC37D006E019A /* PublicQueryKeysTest.h */,
+				B0FB204816DDC37D006E019A /* PublicQueryKeysTest.m */,
 			);
 			path = iGrapeVineTests;
 			sourceTree = "<group>";
@@ -345,6 +359,7 @@
 				B0F1131A16D5E465007F9F33 /* Root.m in Sources */,
 				B0F1132216D5E479007F9F33 /* LinkedListNode.m in Sources */,
 				B0F1132316D5E479007F9F33 /* LinkedMenuList.m in Sources */,
+				B0FB204516DDC25C006E019A /* PublicVariables.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +372,9 @@
 				B0F1133216D5E4A6007F9F33 /* LinkedListTest.m in Sources */,
 				B0F1133316D5E4A6007F9F33 /* LinkedMenuListNodeTest.m in Sources */,
 				B0F1133516D5E4A6007F9F33 /* RootTest.m in Sources */,
+				B0FB204316DDC175006E019A /* LinkedList.m in Sources */,
+				B0FB204616DDC25C006E019A /* PublicVariables.m in Sources */,
+				B0FB204916DDC37D006E019A /* PublicQueryKeysTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
